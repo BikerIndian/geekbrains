@@ -1,5 +1,8 @@
 package geekUniversityAndroid.quarter1.javaCoreAdvancedLevel.Lesson06;
 
+import geekUniversityAndroid.quarter1.javaCoreAdvancedLevel.Lesson06.client.Client;
+import geekUniversityAndroid.quarter1.javaCoreAdvancedLevel.Lesson06.server.Server;
+
 public class MainLesson06 {
 
     /*
@@ -7,7 +10,7 @@ public class MainLesson06 {
 	    Факультет:      Geek University Android-разработки
 	    Курс: 		    Java Core. Продвинутый уровень
 	    Урок: 		    Урок 6. Работа с сетью
-	    Дата правки:    01.07.2020
+	    Дата правки:    02.07.2020
     */
 
     public static void main(String[] args) {
@@ -28,6 +31,8 @@ public class MainLesson06 {
       запускать цикл, который будет ожидать второго/третьего/n-го клиентов
 
     */
+      //  new Server().run();
+      //  new Client().run();
 
     }
 }
