@@ -9,17 +9,58 @@ package geekUniversityAndroid.quarter1.javaCoreAdvancedLevel.Lesson05;
     */
 
 public class MainLesson05 {
-    /*
+
+   /*
         1) Создают одномерный длинный массив, например:
            static final int size = 10000000;
            static final int h = size / 2;
            float[] arr = new float[size];
-        2) Заполняют этот массив единицами;
-        3) Засекают время выполнения: long a = System.currentTimeMillis();
+    */
+
+    static final int size = 10000000;
+    static final int h = size / 2;
+
+
+
+    public static void main(String[] args) {
+
+        float[] arr = new float[size];
+        //   2) Заполняют этот массив единицами;
+        for (int i = 0; i <arr.length ; i++) {
+            arr[i]=1;
+        }
+
+
+        // 3,4,5
+        printTimeWork1(arr.clone());
+        System.out.println();
+        // 6
+        printTimeWork2(arr.clone());
+
+    }
+
+    private static void printTimeWork1(float[] arr) {
+
+        //   3) Засекают время выполнения: long a = System.currentTimeMillis();
+        long timeStart1 = System.currentTimeMillis();
+
+     /*
         4) Проходят по всему массиву и для каждой ячейки считают новое значение
            по формуле:
-           arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
-        5) Проверяется время окончания метода System.currentTimeMillis();
+     */
+        ArrMath arrMath = new ArrMath(arr,0);
+        arrMath.run();
+
+        //   5) Проверяется время окончания метода System.currentTimeMillis();
+
+        long timeStop1 = System.currentTimeMillis();
+        System.out.println("Время выполнения в один поток "+(timeStop1 - timeStart1));
+    }
+
+    private static void printTimeWork2(float[] arr) {
+
+
+          /*
         6) В консоль выводится время работы: System.out.println(System.currentTimeMillis() - a);
            Отличие первого метода от второго:
            Первый просто бежит по массиву и вычисляет значения.
@@ -45,4 +86,41 @@ public class MainLesson05 {
            arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
            }
      */
+/*
+
+ */
+
+        float[] arr1 = new float[h];
+        float[] arr2 = new float[h];
+
+        /*
+        System.arraycopy(источник, индекс источника,
+                массив-назначение, индекс массив-назначение,
+                сколько ячеек копируем)
+        */
+        long timeStart = System.currentTimeMillis();
+        System.arraycopy(arr, 0, arr1, 0, h);
+        System.arraycopy(arr, h, arr2, 0, h);
+
+
+        ArrMath t1 = new ArrMath(arr1,0);
+        t1.start();
+
+        ArrMath t2 = new ArrMath(arr2,h);
+        t2.start();
+
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Склейка
+        System.arraycopy(arr1, 0, arr, 0, h);
+        System.arraycopy(arr2, 0, arr, h, h);
+
+        long timeStop = System.currentTimeMillis();
+        System.out.println("Время выполнения в два потока "+(timeStop - timeStart));
+    }
 }
