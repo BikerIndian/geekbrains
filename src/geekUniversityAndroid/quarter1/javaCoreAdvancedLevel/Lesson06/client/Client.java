@@ -64,7 +64,7 @@ public class Client {
     private void keyboardRead() {
         Thread tKeyRead = new Thread(() -> {
             while (true) {
-                sendMsg(keyboard.next());
+                sendMsg(keyboard.nextLine());
             }
         });
         tKeyRead.setDaemon(true);

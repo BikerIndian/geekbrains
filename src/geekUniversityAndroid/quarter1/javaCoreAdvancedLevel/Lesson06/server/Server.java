@@ -66,7 +66,7 @@ public class Server {
 
             Thread tKeyRead = new Thread(() -> {
                 while (true) {
-                    sendMsg(keyboard.next());
+                    sendMsg(keyboard.nextLine());
                 }
 
             });
