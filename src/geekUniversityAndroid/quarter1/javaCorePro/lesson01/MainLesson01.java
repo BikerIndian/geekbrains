@@ -8,12 +8,36 @@ package geekUniversityAndroid.quarter1.javaCorePro.lesson01;
 	    Дата правки:    15.07.2020
   */
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class MainLesson01 {
     public static void main(String[] args) {
         /*
         1. Написать метод, который меняет два элемента массива местами
            (массив может быть любого ссылочного типа);
+        */
+
+        System.out.println("1 Задание.");
+        String[] arrStr = {"0","1","2","3"};
+        int i =1;
+        int j =3;
+        printArr(arrStr,i,j);
+        changesArr(arrStr,i,j);
+        printArr(arrStr,i,j);
+
+        Double[] arrInt = {1.1, 5.3, 4.0, 3.6};
+        printArr(arrInt,i,j);
+        changesArr(arrInt,i,j);
+        printArr(arrInt,i,j);
+        /*
         2. Написать метод, который преобразует массив в ArrayList;
+        */
+        ArrayList arrList = toArrayList(arrInt);
+        int testIndex = 1;
+        System.out.println("2 Задание.");
+        System.out.printf("ArrayList[%d] - %s \n",testIndex,arrList.get(testIndex).toString());
+        /*
         3. Большая задача:
 
            Есть классы Fruit -> Apple, Orange (больше фруктов не надо);
@@ -37,4 +61,22 @@ public class MainLesson01 {
 
          */
     }
+
+    private static<T> ArrayList toArrayList(T arr[]) {
+        ArrayList arrayList = new ArrayList();
+        Collections.addAll(arrayList,  arr);
+        return arrayList;
+    }
+
+    private static  <T> T[] changesArr(T arr[] , int i, int j) {
+        T a1 = arr[i];
+        arr[i]=arr[j];
+        arr[j]=a1;
+        return arr;
+    }
+
+    private static void printArr(Object arr[], int i, int j) {
+        System.out.println(arr.getClass().getName()+" - "+arr[i].toString()+" "+arr[j].toString());
+    }
+
 }
