@@ -6,9 +6,11 @@ public class MyArrayList<T extends Comparable<T>> {
     private T[] list;
     private int size = 0;
     private final int DEFAULT_CAPACITY = 10;
+    private int capacity = DEFAULT_CAPACITY;
 
 
     public MyArrayList(int capacity) {
+        this.capacity = capacity;
         if (capacity < 0) {
             throw new IllegalArgumentException("capacity : " + capacity);
         }
@@ -20,18 +22,32 @@ public class MyArrayList<T extends Comparable<T>> {
     }
 
     public void add(T item) {
+        enlargeArr();
         list[size] = item;
         size++;
     }
 
+
     public void add(int index, T item) {
         checkCorrectIndex(index);
-
+        enlargeArr();
         for (int i = size; i > index; i--) {
             list[i] = list[i - 1];
         }
         list[index] = item;
         size++;
+    }
+
+    private void enlargeArr() {
+        if (size < capacity) {
+            return;
+        }
+        capacity = size*2;
+        T[] listNew = (T[]) new Comparable[capacity];
+        for (int i = 0; i < size; i++) {
+            listNew[i] = list[i];
+        }
+        list = listNew;
     }
 
     public boolean remove(T item) {
