@@ -1,6 +1,5 @@
 package geekUniversityAndroid.alg.lesson03;
 
-import java.util.Arrays;
 import java.util.EmptyStackException;
 
 public class MyDeca<T> {
@@ -27,7 +26,7 @@ public class MyDeca<T> {
     }
 
 
-    public void InsertRight(T item) {
+    public void insertRight(T item) {
         if (isFull()) {
             throw new StackOverflowError();
         }
@@ -36,23 +35,56 @@ public class MyDeca<T> {
         end = nextIndex(end);
     }
 
+    public void insertLeft(T item) {
+        if (isFull()) {
+            throw new StackOverflowError();
+        }
+        size++;
+        begin = nextIndexL(begin);
+        list[begin] = item;
+    }
+
     public T removeLeft() {
-        T value = peek();
+        T value = peekL();
         size--;
         list[begin] = null;
         begin = nextIndex(begin);
         return value;
     }
 
-    public T peek() {
+    public T removeRight() {
+        T value = peekR();
+        size--;
+        list[end] = null;
+        end = nextIndexL(end);
+        return value;
+    }
+
+    public T peekL() {
         if (isEmpty()) {
             throw new EmptyStackException();
         }
         return list[begin];
     }
+    public T peekR() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        if (0 == end){
+            return list[list.length-1];
+        }
+        return list[end-1];
+    }
 
     private int nextIndex(int index) {
         return (index + 1) % list.length;
+    }
+
+    private int nextIndexL(int index) {
+        if (0 == index){
+            return list.length-1;
+        }
+        return (index -1 ) ;
     }
 
     public int size() {
@@ -82,4 +114,5 @@ public class MyDeca<T> {
         sb.append("]");
         return sb.toString();
     }
+
 }
