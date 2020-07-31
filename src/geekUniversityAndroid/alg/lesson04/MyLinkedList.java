@@ -1,8 +1,9 @@
 package geekUniversityAndroid.alg.lesson04;
 
 import java.util.Iterator;
+import java.util.ListIterator;
 
-public class MyLinkedList<T> implements Iterable<T>{
+public class MyLinkedList<T> implements Iterable<T> {
     private Node first;
     private Node last;
     private int size;
@@ -11,6 +12,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     public Iterator<T> iterator() {
         return new Iter();
     }
+
 
     public MyLinkedList() {
         first = null;
@@ -51,6 +53,7 @@ public class MyLinkedList<T> implements Iterable<T>{
             return current.value;
         }
     }
+
 
     public void insertFirst(T item) {
         Node newNode = new Node(item, first);
@@ -219,4 +222,72 @@ public class MyLinkedList<T> implements Iterable<T>{
 
         return sb.toString();
     }
+
+    //ListIterator
+    public ListIterator<T> listIterator(){
+        return new IterList();
+    }
+    private class IterList implements  ListIterator<T>{
+        int nextIndex=0;
+        Node current = new Node(null, first);
+
+        @Override
+        public boolean hasNext() {
+            return current.next != null;
+        }
+
+        @Override
+        public T next() {
+            current = current.next;
+            nextIndex++;
+            return current.value;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return nextIndex > 0;
+        }
+
+        @Override
+        public T previous() {
+            T value = current.value;
+            if (current.previous != null) {
+                current = current.previous;
+            }else {
+                current = new Node(null, current);
+            }
+            nextIndex--;
+            return value;
+        }
+
+        @Override
+        public int nextIndex() {
+            return nextIndex;
+        }
+
+        @Override
+        public int previousIndex() {
+            return nextIndex-1;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(T item) {
+
+        }
+
+        @Override
+        public void add(T item) {
+            insertFirst(item);
+            nextIndex++;
+        }
+    }
+
+
+
+
 }
