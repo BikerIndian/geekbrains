@@ -15,6 +15,7 @@ public class MainLesson04 {
         
         // 1. Добавить ListIterator, реализовать некоторые из его методов.
         testListIterator();
+        System.out.println();
         // 2. Реализовать LinkedQueue (очередь, на базе связанных списков.)
         testLinkedQueue();
         
@@ -58,5 +59,15 @@ previous: previousIndex = 0 value = Katia
 
 
     private static void testLinkedQueue() {
+        MyLinkedQueue<String> queue = new MyLinkedQueue<>();
+        queue.add("Katia");
+        queue.add("Petia");
+        queue.add("Maria");
+        System.out.println(queue);
+        System.out.println("peek - "+queue.peek());
+        System.out.println("peek - "+queue.peek());
+        System.out.println("poll - "+queue.poll());
+        System.out.println("poll - "+queue.poll());
+        System.out.println(queue);
     }
 }
