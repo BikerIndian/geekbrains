@@ -24,7 +24,16 @@ public class MainLesson05 {
     }
 
     private static void degree() {
+        System.out.println(pow(3, 3));
 
+    }
+    private static double pow(double num, double exponent) {
+        if (exponent <= 1){
+            return num;
+        }
+
+        num = num * pow(num,exponent-1);
+        return num;
     }
 
     private static void backpack() {
