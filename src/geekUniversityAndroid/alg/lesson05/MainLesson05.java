@@ -1,5 +1,10 @@
 package geekUniversityAndroid.alg.lesson05;
 
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
 public class MainLesson05 {
 
     /*
@@ -24,7 +29,7 @@ public class MainLesson05 {
     }
 
     private static void degree() {
-        System.out.println(pow(3, 3));
+        System.out.println("возведение числа "+pow(3, 3));
 
     }
     private static double pow(double num, double exponent) {
@@ -37,6 +42,18 @@ public class MainLesson05 {
     }
 
     private static void backpack() {
+        List<Box> boxArr = new LinkedList<>();
+        boxArr.add(new Box(1,5));
+        boxArr.add(new Box(5,2));
+        boxArr.add(new Box(4,3));
+        boxArr.add(new Box(2,5));
+        boxArr.add(new Box(3,10));
+
+        Backpack backpack = new Backpack(9);
+        System.out.println("Рюкзак");
+        System.out.println("Не удалось дабавить: "+backpack.add(boxArr));
+        System.out.println("Что в рюкзаке: "+backpack.getBackpackBox());
+        System.out.println("Вес рюкзака: "+backpack.getSizeBackpackBox());
 
     }
 
