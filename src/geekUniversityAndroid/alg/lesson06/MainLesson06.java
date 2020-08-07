@@ -1,5 +1,7 @@
 package geekUniversityAndroid.alg.lesson06;
 
+import java.util.Random;
+
 public class MainLesson06 {
 
     /*
@@ -20,5 +22,34 @@ public class MainLesson06 {
         2. Проанализировать, какой процент созданных деревьев являются несбалансированными.
         */
 
+
+        for (int i = 0; i < 20; i++) {
+            System.out.println("Map #"+(i+1));
+            MyTreeMap<Integer, String> map = createTreeMap();
+            MyTreeMapAnalyzer myTreeMapAnalyzer = new MyTreeMapAnalyzer(map);
+            //myTreeMapAnalyzer.print();
+
+//            if (myTreeMapAnalyzer.isBalance()) {
+//                System.out.println("Tree Balance");
+//
+//            }
+            System.out.println();
+        }
+
+
+
+        //System.out.println(map);
+
+    }
+
+    private static MyTreeMap<Integer, String> createTreeMap() {
+        MyTreeMap<Integer, String> map = new MyTreeMap<>(6);
+        Random rd = new Random();
+
+        for (int i = 0; i < 100; i++) {
+            int n = rd.nextInt(200)-100;
+            map.put(rd.nextInt(20),Integer.toString(n));
+        }
+        return map;
     }
 }
