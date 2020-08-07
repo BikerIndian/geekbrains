@@ -5,14 +5,14 @@ import java.util.*;
 public class MyTreeMapAnalyzer {
 
     private SortedMap<Integer,List> listDepthNode =  new TreeMap();
-    private MyTreeMap.Node node;
+    private MyTreeMap.Node nodeRoot;
 
 
 
     public MyTreeMapAnalyzer(MyTreeMap<Integer, String> map) {
-        this.node = map.getRootNode();
+        this.nodeRoot = map.getRootNode();
         int depth = 0;
-        addNodeDepth(this.node, "root", this.node.key, depth);
+        addNodeDepth(this.nodeRoot, "root", this.nodeRoot.key, depth);
 
         clearNull();
 
@@ -106,7 +106,32 @@ public class MyTreeMapAnalyzer {
 
     public boolean isBalance(){
 
-        int max = 0;
+        int a = heightLeft(this.nodeRoot,0);
+        int b = heightRight(this.nodeRoot,0);
+        System.out.print("Left = " +a);
+        System.out.println(" Right = " +b);
+
+        if ( -1 <= a-b &&  1 >= a-b) {
+            return true;
+        }
+        return false;
+    }
+
+    private int heightLeft(MyTreeMap.Node node,int height) {
+        if (node.left == null) {
+            return height;
+        }
+        return heightLeft(node.left,height+1);
+    }
+
+    private int heightRight(MyTreeMap.Node node,int height) {
+        if (node.right == null) {
+            return height;
+        }
+        return heightRight(node.right,height+1);
+    }
+
+    public void printSize() {
         Iterator iterator = listDepthNode.keySet().iterator();
         while(iterator.hasNext()) {
             int key = (int) iterator.next();
@@ -115,13 +140,10 @@ public class MyTreeMapAnalyzer {
             if (getListNodeSize(listNode) == 0){
                 break;
             }
-            max = Math.max(max,getListNodeSize(listNode));
+
             System.out.printf("[%d] size = %d \n",listDepthNode.size()-key-1, getListNodeSize(listNode));
 
-
         }
-
-        return false;
     }
 
     class NodeD{

@@ -22,28 +22,27 @@ public class MainLesson06 {
         2. Проанализировать, какой процент созданных деревьев являются несбалансированными.
         */
 
+        int maxDepthMap = 6;
+        int treeMap = 20;
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < treeMap; i++) {
             System.out.println("Map #"+(i+1));
-            MyTreeMap<Integer, String> map = createTreeMap();
+            MyTreeMap<Integer, String> map = createTreeMap(maxDepthMap);
             MyTreeMapAnalyzer myTreeMapAnalyzer = new MyTreeMapAnalyzer(map);
             //myTreeMapAnalyzer.print();
+            //myTreeMapAnalyzer.printSize();
+            //System.out.println(map);
 
-//            if (myTreeMapAnalyzer.isBalance()) {
-//                System.out.println("Tree Balance");
-//
-//            }
+            if (myTreeMapAnalyzer.isBalance()) {
+                System.out.println("Tree Balance!");
+            }
             System.out.println();
         }
 
-
-
-        //System.out.println(map);
-
     }
 
-    private static MyTreeMap<Integer, String> createTreeMap() {
-        MyTreeMap<Integer, String> map = new MyTreeMap<>(6);
+    private static MyTreeMap<Integer, String> createTreeMap(int maxDepthMap) {
+        MyTreeMap<Integer, String> map = new MyTreeMap<>(maxDepthMap);
         Random rd = new Random();
 
         for (int i = 0; i < 100; i++) {
