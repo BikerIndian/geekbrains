@@ -4,13 +4,23 @@ import java.util.NoSuchElementException;
 
 public class MyTreeMap<Key extends Comparable<Key>, Value> {
     private Node root;
+    int maxDepthMap = 100;
+    private boolean end = false;
 
-    private class Node {
+    public MyTreeMap() {
+    }
+
+    public MyTreeMap(int maxDepthMap) {
+        this.maxDepthMap = maxDepthMap +1;
+    }
+
+    public class Node {
         Key key;
         Value value;
         Node left;
         Node right;
         int size;
+        int depth;
 
         public Node(Key key, Value value) {
             this.key = key;
@@ -73,20 +83,32 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
             //delete(key)
             return;
         }
-        root = put(root, key, value);
+
+        if (!this.end) {
+            root = put(root, key, value,0);
+        }
     }
 
-    private Node put(Node node, Key key, Value value) {
-        if (node == null) {
-            return new Node(key, value);
+    private Node put(Node node, Key key, Value value, int depth) {
+
+
+        if ( this.maxDepthMap <=depth+1){
+            this.end = true;
+            return node;
+        }
+
+        if (node == null ) {
+            Node nodeNew = new Node(key, value);
+            nodeNew.depth = depth;
+            return nodeNew;
         }
         int cmp = key.compareTo(node.key);
         if (cmp == 0) {
             node.value = value;
         } else if (cmp < 0) {
-            node.left = put(node.left, key, value);
+            node.left = put(node.left, key, value,depth+1);
         } else {
-            node.right = put(node.right, key, value);
+            node.right = put(node.right, key, value,depth+1);
         }
         node.size = size(node.left) + size(node.right) + 1;
         return node;
@@ -132,13 +154,13 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         int cmp = key.compareTo(node.key);
         if (cmp < 0) {
             node.left = delete(node.left, key);
-        } else if(cmp> 0){
+        } else if (cmp > 0) {
             node.right = delete(node.right, key);
         } else {
-            if(node.left == null){
+            if (node.left == null) {
                 return node.right;
             }
-            if(node.right == null){
+            if (node.right == null) {
                 return node.left;
             }
 
@@ -164,4 +186,12 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
                 node.key + " = " + node.value +
                 " " + toString(node.right);
     }
+
+    public Node getRootNode(){
+        return root;
+    }
+
+
+
+
 }
