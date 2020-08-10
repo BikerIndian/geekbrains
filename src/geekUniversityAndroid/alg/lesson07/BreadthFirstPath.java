@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class BreadthFirstPath {
     private boolean[] marked;
-    private int[] edgeTo;
+    private  int[] edgeTo;
     private int source;
 
 
@@ -50,4 +50,13 @@ public class BreadthFirstPath {
         }
         return stack;
     }
+
+     boolean[] getMarked() {
+        return marked;
+    }
+
+     int[] getEdgeTo() {
+        return edgeTo;
+    }
+
 }
