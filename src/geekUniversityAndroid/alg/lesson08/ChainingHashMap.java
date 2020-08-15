@@ -16,6 +16,8 @@ public class ChainingHashMap<Key, Value> {
         }
     }
 
+
+
     private class Node {
         Key key;
         Value value;
@@ -73,13 +75,28 @@ public class ChainingHashMap<Key, Value> {
         return null;
     }
 
+    public Value remove(Key key) {
+        checkKeyNotNull(key);
+        int i = hash(key);
+
+        for (int j = 0; j < st[i].size(); j++) {
+            Node node = st[i].get(j);
+            if (key.equals(node.key)) {
+                st[i].remove(j);
+                return node.value;
+            }
+        }
+
+        return null;
+    }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < capacity; i++) {
             for (Node node : st[i]) {
-                sb.append(node.key).append(" ");
+                sb.append(node.key).append(" - ");
+                sb.append(node.value).append(" | ");
             }
             sb.append("\n");
         }
